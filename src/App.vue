@@ -26,6 +26,9 @@ html {
 p {
   margin: 0;
 }
+a {
+    color: $medium-grey;
+}
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

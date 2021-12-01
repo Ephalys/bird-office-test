@@ -42,7 +42,7 @@ export default {
   }
   &-items {
     display: grid;
-    gap: 20px;
+    gap: 10px;
     grid-template-columns: repeat(5, 1fr);
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <nav class="nav">
-    <a href="">
+    <router-link to="/">
       <img src="../assets/images/logo.svg" alt="logo" />
-    </a>
+    </router-link>
     <div class="nav-cart">
       <img src="../assets/images/icons/cart.svg" alt="cart" />
       <span class="nav-cart-label">Shopping Cart</span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <router-link :to="{ name: 'Product', params: { id: product.id }}" class="card">
     <img
       src="../assets/images/products/product_0.jpg"
       class="card-image"
@@ -12,7 +12,7 @@
     <p class="card-desc">
       {{ product.excerpt }}
     </p>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -31,6 +31,13 @@ export default {
 .card {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  padding: 10px;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #eeeeee;
+    transition: background-color 0.3s;
+  }
 
   &-image {
     width: 100%;
