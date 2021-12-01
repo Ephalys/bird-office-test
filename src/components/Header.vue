@@ -1,10 +1,10 @@
 <template>
   <nav class="nav">
     <a href="">
-      <img src="../assets/logo.svg" alt="logo" />
+      <img src="../assets/images/logo.svg" alt="logo" />
     </a>
     <div class="nav-cart">
-      <img src="../assets/icons/cart.svg" alt="cart" />
+      <img src="../assets/images/icons/cart.svg" alt="cart" />
       <span class="nav-cart-label">Shopping Cart</span>
       <div class="nav-cart-count">
         {{ cart_items }}
