@@ -43,6 +43,10 @@ export default {
     &-label {
       font-size: 12px;
       color: $light-grey;
+
+      @media (max-width: $screen-max-sm) {
+        display: none;
+      }
     }
     &-count {
       display: flex;

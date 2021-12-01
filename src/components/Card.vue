@@ -32,7 +32,6 @@ export default {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  padding: 10px;
   transition: background-color 0.3s;
   &:hover {
     background-color: #eeeeee;
@@ -47,7 +46,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 10px;
     border-bottom: 5px solid rgba(254, 189, 23, 0.1);
 
     .card-title {
@@ -61,7 +60,7 @@ export default {
     }
   }
   &-desc {
-    margin-top: 10px;
+    padding: 10px;
   }
 }
 </style>

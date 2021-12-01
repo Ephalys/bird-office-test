@@ -20,9 +20,9 @@ export default {
     products: Array,
   },
   computed: {
-      formatCategoryTitle() {
-          return this.categoryTitle.replaceAll('_', ' ')
-      }
+    formatCategoryTitle() {
+      return this.categoryTitle.replaceAll("_", " ");
+    },
   },
   data() {
     return {};
@@ -44,6 +44,14 @@ export default {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(5, 1fr);
+
+    @media (max-width: $screen-max-xs) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $screen-min-xs) and (max-width: $screen-max-md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 }
 </style>
