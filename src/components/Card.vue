@@ -1,12 +1,16 @@
 <template>
   <div class="card">
-    <img src="assets/images/products/product_0.jpg" class="card-image" alt="" />
+    <img
+      src="../assets/images/products/product_0.jpg"
+      class="card-image"
+      alt=""
+    />
     <div class="card-infos">
-      <p class="card-title">Step behind</p>
-      <p class="card-price">$7,956</p>
+      <h3 class="card-title">{{ product.title }}</h3>
+      <p class="card-price">${{ product.price }}</p>
     </div>
     <p class="card-desc">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, eum.
+      {{ product.excerpt }}
     </p>
   </div>
 </template>
@@ -14,6 +18,9 @@
 <script>
 export default {
   name: "Card",
+  props: {
+    product: Object,
+  },
   data() {
     return {};
   },
@@ -26,8 +33,7 @@ export default {
   flex-direction: column;
 
   &-image {
-      width: 100%;
-      min-height: 320px;
+    width: 100%;
   }
 
   &-infos {
@@ -38,15 +44,17 @@ export default {
     border-bottom: 5px solid rgba(254, 189, 23, 0.1);
 
     .card-title {
-    color: $dark-grey;
+      color: $dark-grey;
       font-weight: bold;
+      font-size: 16px;
+      margin: 0;
     }
     .card-price {
       color: $primary;
     }
   }
   &-desc {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 }
 </style>
