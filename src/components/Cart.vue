@@ -45,8 +45,7 @@ export default {
   cursor: auto;
 
   @media (max-width: $screen-max-sm) {
-    width: unset;
-    max-width: 100%;
+    width: 100%;
   }
   &-item {
     display: grid;
@@ -109,7 +108,7 @@ export default {
     }
 
     button {
-      padding: 5px 0;
+      padding: 5px;
     }
   }
 }

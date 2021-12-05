@@ -17,18 +17,17 @@
       </div>
       <div class="product-cart">
         <div class="product-quantity">
-          <button class="cart-action" @click="itemCount > 1 && itemCount--">-</button>
-          {{itemCount}}
+          <button class="cart-action" @click="itemCount > 1 && itemCount--">
+            -
+          </button>
+          {{ itemCount }}
           <button class="cart-action" @click="itemCount++">+</button>
         </div>
         <button class="btn-primary cart-add">Add to Cart</button>
       </div>
     </div>
     <div class="product-image">
-      <img
-        src="../assets/images/products/product_0.jpg"
-        alt=""
-      />
+      <img src="../assets/images/products/product_0.jpg" alt="" />
     </div>
   </div>
 </template>
@@ -49,8 +48,23 @@ export default {
   display: flex;
   gap: 20px;
 
+  @media (max-width: $screen-max-sm) {
+    flex-direction: column;
+  }
+
   &-image {
     min-width: 40%;
+
+
+    @media (max-width: $screen-max-xs) {
+      min-width: 80%;
+      margin: auto;
+    }
+
+    @media (min-width: $screen-min-xs) and (max-width: $screen-max-sm) {
+      max-width: 50%;
+      margin: auto;
+    }
 
     img {
       width: 100%;
@@ -58,9 +72,18 @@ export default {
   }
 
   &-infos {
+    margin-bottom: 30px;
+    @media (max-width: $screen-max-sm) {
+      order: 2;
+    }
+
     h1 {
       font-size: 48px;
       margin-bottom: 15px;
+
+      @media (max-width: $screen-max-sm) {
+        font-size: 28px;
+      }
     }
   }
 
@@ -69,6 +92,10 @@ export default {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+
+    @media (max-width: $screen-max-sm) {
+      font-size: 20px;
+    }
 
     &-infos {
       color: $light-grey;
@@ -97,7 +124,7 @@ export default {
 
     .cart-action {
       padding: 10px;
-      background-color:#E5E5E5;
+      background-color: #e5e5e5;
 
       &:hover {
         background-color: #cacaca;
