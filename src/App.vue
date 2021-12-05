@@ -27,14 +27,30 @@ p {
   margin: 0;
 }
 a {
-    color: $medium-grey;
+  color: $medium-grey;
 }
 button {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s;
+
+  &:hover {
+    transition: all 0.3s;
+  }
+
+  &.btn-primary {
+    color: white;
+    background-color: $primary;
+    border: 1px solid transparent;
+
+    &:hover {
+      color: $primary;
+      background-color: white;
+      border: 1px solid $primary;
+    }
+  }
 }
 #app {
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -47,10 +63,12 @@ button {
   max-width: 1160px;
   margin: auto;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
 }
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

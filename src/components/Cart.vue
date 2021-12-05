@@ -6,9 +6,9 @@
           Step behind the Scenes of Havana’s theater
         </div>
         <div class="divider"></div>
-        <div class="cart-item-delete">
+        <button class="cart-item-delete">
           <img src="../assets/images/icons/trash.svg" alt="" />
-        </div>
+        </button>
       </div>
       <div class="cart-item-quantity">2 x 7,956$</div>
       <div class="cart-item-price">15,912$</div>
@@ -16,7 +16,7 @@
     <div class="cart-footer">
       <span class="cart-total-label">TOTAL</span>
       <span class="cart-total-price">29.999$</span>
-      <button>Validate</button>
+      <button class="btn-primary">Validate</button>
     </div>
   </div>
 </template>
@@ -85,7 +85,7 @@ export default {
     }
 
     &-delete {
-      cursor: pointer;
+      background: none;
       justify-self: right;
     }
   }
@@ -109,19 +109,7 @@ export default {
     }
 
     button {
-      color: white;
-      background-color: $primary;
-      border: 1px solid transparent;
       padding: 5px 0;
-      cursor: pointer;
-      transition: all 0.3s;
-
-      &:hover {
-        color: $primary;
-        background-color: white;
-        border: 1px solid $primary;
-        transition: all 0.3s;
-      }
     }
   }
 }
