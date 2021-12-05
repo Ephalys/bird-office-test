@@ -56,6 +56,7 @@ export default {
     &-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
       grid-column-end: span 4;
     }
@@ -64,6 +65,10 @@ export default {
       background-color: rgba(254, 189, 23, 0.1);
       height: 1px;
       width: 100%;
+
+      @media (max-width: $screen-max-xs) {
+        display: none;
+      }
     }
 
     &-title {
@@ -75,12 +80,22 @@ export default {
       grid-row: 2;
       grid-column: 2;
       color: $light-grey;
+
+      @media (max-width: $screen-max-xs) {
+        grid-row: 2;
+        grid-column: 1;
+      }
     }
 
     &-price {
       grid-row: 2;
       grid-column: 3;
       align-self: end;
+
+      @media (max-width: $screen-max-xs) {
+        grid-row: 3;
+        grid-column: 1;
+      }
     }
 
     &-delete {

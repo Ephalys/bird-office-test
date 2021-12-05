@@ -44,6 +44,7 @@ button {
     color: white;
     background-color: $primary;
     border: 1px solid transparent;
+    border-radius: 3px;
 
     &:hover {
       color: $primary;
