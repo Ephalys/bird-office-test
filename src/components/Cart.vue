@@ -1,27 +1,35 @@
 <template>
   <div v-if="visibleCart" class="cart">
-    <div v-for="cartItem in cart" class="cart-item" :key="cartItem.id">
-      <div class="cart-item-header">
-        <div class="cart-item-title">
-          {{ cartItem.title }}
+    <div v-if="cart.length">
+      <transition-group name="fade" appear>
+        <div v-for="cartItem in cart" class="cart-item" :key="cartItem.id">
+          <div class="cart-item-header">
+            <div class="cart-item-title">
+              {{ cartItem.title }}
+            </div>
+            <div class="divider"></div>
+            <button
+              class="cart-item-delete"
+              @click="deleteFromCart(cartItem.id)"
+            >
+              <img src="../assets/images/icons/trash.svg" alt="" />
+            </button>
+          </div>
+          <div class="cart-item-quantity">
+            {{ cartItem.quantity }} x {{ numberWithCommas(cartItem.price) }}$
+          </div>
+          <div class="cart-item-price">
+            {{ numberWithCommas(cartItem.quantity * cartItem.price) }}$
+          </div>
         </div>
-        <div class="divider"></div>
-        <button class="cart-item-delete" @click="deleteFromCart(cartItem.id)">
-          <img src="../assets/images/icons/trash.svg" alt="" />
-        </button>
-      </div>
-      <div class="cart-item-quantity">
-        {{ cartItem.quantity }} x {{ numberWithCommas(cartItem.price) }}$
-      </div>
-      <div class="cart-item-price">
-        {{ numberWithCommas(cartItem.quantity * cartItem.price) }}$
+      </transition-group>
+      <div class="cart-footer">
+        <span class="cart-total-label">TOTAL</span>
+        <span class="cart-total-price">{{ numberWithCommas(total) }}$</span>
+        <button class="btn-primary">Validate</button>
       </div>
     </div>
-    <div class="cart-footer">
-      <span class="cart-total-label">TOTAL</span>
-      <span class="cart-total-price">{{ numberWithCommas(total) }}$</span>
-      <button class="btn-primary">Validate</button>
-    </div>
+    <div v-else class="cart-item no-items">No items in cart</div>
   </div>
 </template>
 
@@ -48,7 +56,7 @@ export default {
   },
   computed: {
     cart() {
-      return this.store.state.cart
+      return this.store.state.cart;
     },
     total() {
       return this.cart.reduce((total, next) => {
@@ -77,6 +85,11 @@ export default {
     grid-template-columns: 2fr 1fr 1fr 0.5fr;
     gap: 10px;
     padding: 20px 0;
+
+    &.no-items {
+      display: flex;
+      justify-content: center;
+    }
 
     &-header {
       display: flex;
