@@ -7,7 +7,7 @@
     />
     <div class="card-infos">
       <h3 class="card-title">{{ product.title }}</h3>
-      <p class="card-price">${{ product.price }}</p>
+      <p class="card-price">${{ numberWithCommas(product.price) }}</p>
     </div>
     <p class="card-desc">
       {{ product.excerpt }}
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { numberWithCommas } from "@/helpers";
+
 export default {
   name: "Card",
   props: {
@@ -24,6 +26,9 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    numberWithCommas
+  }
 };
 </script>
 

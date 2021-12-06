@@ -1,10 +1,10 @@
 <template>
   <div class="product container">
     <div class="product-infos">
-      <h1>{{this.productData.title}}</h1>
-      <div class="product-price">${{this.productData.price}}</div>
+      <h1>{{ this.productData.title }}</h1>
+      <div class="product-price">${{ numberWithCommas(this.productData.price) }}</div>
       <div class="product-description">
-        {{this.productData.description}}
+        {{ this.productData.description }}
       </div>
       <div class="product-price-infos">
         Prices valid till 31.10.2019, yearly adjustment for conversion rate to
@@ -12,13 +12,18 @@
       </div>
       <div class="product-cart">
         <div class="product-quantity">
-          <button class="cart-action" @click="itemCount > 1 && itemCount--">
+          <button
+            class="cart-action"
+            @click="itemQuantity > 1 && itemQuantity--"
+          >
             -
           </button>
-          {{ itemCount }}
-          <button class="cart-action" @click="itemCount++">+</button>
+          {{ itemQuantity }}
+          <button class="cart-action" @click="itemQuantity++">+</button>
         </div>
-        <button class="btn-primary cart-add">Add to Cart</button>
+        <button class="btn-primary cart-add" @click="addToCart">
+          Add to Cart
+        </button>
       </div>
     </div>
     <div class="product-image">
@@ -28,24 +33,49 @@
 </template>
 
 <script>
-import productsJson from "/data/products.json";
+import { useStore } from "vuex";
+import { numberWithCommas } from "@/helpers";
 
 export default {
   name: "Product",
   data() {
+    const store = useStore();
     return {
-      products: productsJson.products,
+      store: store,
+      products: store.state.products[0],
       id: this.$route.params.id,
-      productData: null,
-      itemCount: 1,
+      itemQuantity: 1,
     };
   },
-  created() {
-    this.productData = this.getProductData(this.products)
+  computed: {
+    cart() {
+      return this.store.state.cart
+    },
+    itemInCart() {
+      return this.getProductData(this.cart);
+    },
+    productData() {
+      return this.getProductData(this.products);
+    },
   },
   methods: {
+    numberWithCommas,
+    addToCart() {
+      this.productData.quantity
+        ? (this.productData.quantity += this.itemQuantity)
+        : (this.productData.quantity = this.itemQuantity);
+      if (this.itemInCart == null) {
+        this.store.commit("addCartItem", this.productData);
+      } else {
+        this.store.commit("updateCartItem", this.productData);
+      }
+    },
     getProductData(object) {
-      if (Object.prototype.hasOwnProperty.call(object, "id") && object["id"] == this.id) return object;
+      if (
+        Object.prototype.hasOwnProperty.call(object, "id") &&
+        object["id"] == this.id
+      )
+        return object;
 
       for (var i = 0; i < Object.keys(object).length; i++) {
         if (typeof object[Object.keys(object)[i]] == "object") {

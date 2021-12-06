@@ -1,35 +1,60 @@
 <template>
   <div v-if="visibleCart" class="cart">
-    <div class="cart-item">
+    <div v-for="cartItem in cart" class="cart-item" :key="cartItem.id">
       <div class="cart-item-header">
         <div class="cart-item-title">
-          Step behind the Scenes of Havana’s theater
+          {{ cartItem.title }}
         </div>
         <div class="divider"></div>
-        <button class="cart-item-delete">
+        <button class="cart-item-delete" @click="deleteFromCart(cartItem.id)">
           <img src="../assets/images/icons/trash.svg" alt="" />
         </button>
       </div>
-      <div class="cart-item-quantity">2 x 7,956$</div>
-      <div class="cart-item-price">15,912$</div>
+      <div class="cart-item-quantity">
+        {{ cartItem.quantity }} x {{ numberWithCommas(cartItem.price) }}$
+      </div>
+      <div class="cart-item-price">
+        {{ numberWithCommas(cartItem.quantity * cartItem.price) }}$
+      </div>
     </div>
     <div class="cart-footer">
       <span class="cart-total-label">TOTAL</span>
-      <span class="cart-total-price">29.999$</span>
+      <span class="cart-total-price">{{ numberWithCommas(total) }}$</span>
       <button class="btn-primary">Validate</button>
     </div>
   </div>
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { numberWithCommas } from "@/helpers";
+
 export default {
   name: "Cart",
   props: {
-    product: Object,
     visibleCart: Boolean,
   },
   data() {
-    return {};
+    const store = useStore();
+    return {
+      store: store,
+    };
+  },
+  methods: {
+    numberWithCommas,
+    deleteFromCart(id) {
+      this.store.commit("removeCartItem", id);
+    },
+  },
+  computed: {
+    cart() {
+      return this.store.state.cart
+    },
+    total() {
+      return this.cart.reduce((total, next) => {
+        return total + next.quantity * next.price;
+      }, 0);
+    },
   },
 };
 </script>
@@ -64,7 +89,7 @@ export default {
     .divider {
       background-color: rgba(254, 189, 23, 0.1);
       height: 1px;
-      width: 100%;
+      flex: 1;
 
       @media (max-width: $screen-max-xs) {
         display: none;

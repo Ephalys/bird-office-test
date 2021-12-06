@@ -11,8 +11,8 @@
 
 <script>
 // @ is an alias to /src
+import { useStore } from "vuex";
 import CardList from "@/components/CardList.vue";
-import productsJson from "/data/products.json";
 
 export default {
   name: "Home",
@@ -20,8 +20,9 @@ export default {
     CardList,
   },
   data() {
+    const store = useStore();
     return {
-      products: productsJson.products,
+      products: store.state.products[0],
     };
   },
 };

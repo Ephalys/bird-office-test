@@ -7,7 +7,7 @@
       <img src="../assets/images/icons/cart.svg" alt="cart" />
       <span class="nav-cart-label">Shopping Cart</span>
       <div class="nav-cart-count">
-        {{ cart_items }}
+        {{ cartItems }}
       </div>
       <transition name="fade" appear>
         <Cart :visibleCart="this.visibleCart" />
@@ -20,17 +20,30 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import Cart from "@/components/Cart.vue";
+
 export default {
   name: "Header",
   components: {
     Cart,
   },
   data() {
+    const store = useStore();
     return {
-      cart_items: 0,
+      store: store,
       visibleCart: false,
     };
+  },
+  computed: {
+    cart() {
+      return this.store.state.cart;
+    },
+    cartItems() {
+      return this.cart.reduce((quantity, next) => {
+        return quantity + next.quantity;
+      }, 0);
+    },
   },
   methods: {
     showCart() {
