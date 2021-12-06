@@ -1,15 +1,10 @@
 <template>
   <div class="product container">
     <div class="product-infos">
-      <h1>Step behind the scenes of Havana’s thearter</h1>
-      <div class="product-price">$7,956</div>
+      <h1>{{this.productData.title}}</h1>
+      <div class="product-price">${{this.productData.price}}</div>
       <div class="product-description">
-        Pellentesque habitant morbi tristique senectus et netus et malesuada
-        fames ac turpis egestas. Vestibulum tortor quam Pellentesque habitant
-        morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet,
-        ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi
-        vitae est. Mauris placerat eleifend leo.
+        {{this.productData.description}}
       </div>
       <div class="product-price-infos">
         Prices valid till 31.10.2019, yearly adjustment for conversion rate to
@@ -33,13 +28,33 @@
 </template>
 
 <script>
+import productsJson from "/data/products.json";
+
 export default {
   name: "Product",
   data() {
     return {
+      products: productsJson.products,
       id: this.$route.params.id,
+      productData: null,
       itemCount: 1,
     };
+  },
+  created() {
+    this.productData = this.getProductData(this.products)
+  },
+  methods: {
+    getProductData(object) {
+      if (Object.prototype.hasOwnProperty.call(object, "id") && object["id"] == this.id) return object;
+
+      for (var i = 0; i < Object.keys(object).length; i++) {
+        if (typeof object[Object.keys(object)[i]] == "object") {
+          var o = this.getProductData(object[Object.keys(object)[i]]);
+          if (o != null) return o;
+        }
+      }
+      return null;
+    },
   },
 };
 </script>
@@ -54,7 +69,6 @@ export default {
 
   &-image {
     min-width: 40%;
-
 
     @media (max-width: $screen-max-xs) {
       min-width: 80%;
