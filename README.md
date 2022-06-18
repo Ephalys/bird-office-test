@@ -1,7 +1,10 @@
 # bird-office-test
 
-Test that i had to complete in order to work for Bird Office. The integration is based on a Figma file given by the company.
-This was my first time using Vuex
+This is a test that i had to complete in order to work for Bird Office.
+
+The integration is based on a Figma file given by the company.
+
+This was my first time using Vuex.
 
 ## Project setup
 ```
